@@ -13,8 +13,8 @@ export default function Home() {
       const data = schema.parse({ name, age: Number(age) });
       setResponse({ message: 'Valid data', data });
     } catch (e) {
-      console.log(e.errors);
-      setResponse({ message: e.errors[0].message });
+      console.log(e.errors[0].message);
+      setResponse({ message: e.errors });
     }
   };
 
