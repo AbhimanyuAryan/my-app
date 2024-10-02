@@ -2,11 +2,10 @@
 
 import { useState } from 'react';
 import { schema } from '../validation/schema';
+import useFormStore from '../store/useFormStore';
 
 export default function Home() {
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  const [response, setResponse] = useState(null);
+  const { name, age, response, setName, setAge, setResponse } = useFormStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,8 +13,8 @@ export default function Home() {
       const data = schema.parse({ name, age: Number(age) });
       setResponse({ message: 'Valid data', data });
     } catch (e) {
-      console.log(e.errors[0].message);
-      //setResponse({ message: e.errors });
+      console.log(e.errors);
+      setResponse({ message: e.errors[0].message });
     }
   };
 
